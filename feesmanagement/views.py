@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from . import helper
+from .forms import student_form
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+    form={}
+    form['form']=student_form()
+    return render(request, 'home.html', form)
 
 def classroomSummary(request):
     if request.method == 'GET':
@@ -17,3 +20,7 @@ def classroomSummary(request):
 
 def profilePage(request):
     pass
+
+def login_auth(request):
+    if request.method == 'POST':
+        form = request.POST.get('Name')
