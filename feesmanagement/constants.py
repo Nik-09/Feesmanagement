@@ -1,0 +1,7 @@
+CLASS_EIGHT = 'eight'
+CLASS_NINE = 'nine'
+CLASS_TEN = 'ten'
+CLASS_ELEVEN_COMMERCE = 'eleven-commerce'
+CLSSS_TWELVE_COMMERCE = 'twelve-commerce'
+CLASS_ELEVEN_SCIENCE = 'eleven-science'
+CLASS_TWELVE_SCIENCE = 'twelve-science'
