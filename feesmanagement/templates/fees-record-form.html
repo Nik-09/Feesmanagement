@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fees record form</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1 class="top-header">Fees Record Form</h1>
+        <div class="parent-form-container">
+            <form action="/fees-record-form" method="POST"> {% csrf_token %}
+                <label>Name: </label>
+                <input type="text" name="name" class="form-control input-field" required>
+                <label>Roll number: </label>
+                <input type="text" name="roll" class="form-control input-field" required>
+                <label>Class</label>
+                <select name="selectedClass" class="form-select select-dropdown input-field" required>
+                    <option disabled selected value> -- Select a class -- </option>
+                    <option value="eight">Class 8</option>
+                    <option value="nine">Class 9</option>
+                    <option value="ten">Class 10</option>
+                    <option value="eleven-commerce">Class 11 Commerce</option>
+                    <option value="eleven-science">Class 11 Science</option>
+                    <option value="twelve-commerce">Class 12 Commerce</option>
+                    <option value="twelve-science">Class 12 Science</option>
+                </select>
+                <label>Date: </label>
+                <input type="date" name="date" class="form-control input-field" required>
+                <label>Month of: </label>
+                <select name="selectedMonth" class="form-select select-dropdown input-field" required>
+                    <option disabled selected value> -- Select a month -- </option>
+                    <option value="january">January</option>
+                    <option value="february">February</option>
+                    <option value="march">March</option>
+                    <option value="april">April</option>
+                    <option value="may">May</option>
+                    <option value="june">June</option>
+                    <option value="july">July</option>
+                    <option value="august">August</option>
+                    <option value="september">September</option>
+                    <option value="october">October</option>
+                    <option value="november">November</option>
+                    <option value="december">December</option>
+                </select>
+                <label>Amount: </label>
+                <input type="number" name="amount" class="form-control input-field" required>
+                <label>Subjects</label>
+                <div class="input-field">
+                    <input type="checkbox" id="all" class="form-check-input" name="subjects" value="all">
+                    <label for="all">All</label>
+                    <p>Or</p>
+                    <input type="checkbox" id="biology" class="form-check-input" name="subjects" value="biology">
+                    <label for="biology">Biology</label>
+                    <input type="checkbox" id="chemistry" class="form-check-input" name="subjects" value="chemistry">
+                    <label for="chemistry">Chemistry</label>
+                    <input type="checkbox" id="physics" class="form-check-input" name="subjects" value="physics">
+                    <label for="physics">Physics</label>
+                    <input type="checkbox" id="math" class="form-check-input" name="subjects" value="math">
+                    <label for="math">Maths</label>
+                    <p>Or</p>
+                    <input type="checkbox" id="accounts" class="form-check-input" name="subjects" value="accounts">
+                    <label for="accounts">Accounts</label>
+                    <input type="checkbox" id="busines-studies" class="form-check-input" name="subjects" value="busines-studies">
+                    <label for="busines-studies">Business Studies</label>
+                    <input type="checkbox" id="economics" class="form-check-input" name="subjects" value="economics">
+                    <label for="economics">Economics</label>
+                </div>
+
+                <input type="submit" class="btn btn-success submit-btn" value="submit">
+            </form>
+        </div>
+    </body>
+    <style>
+        .parent-form-container {
+            width: 40%;
+            border: 1px solid;
+            border-radius: 10px;
+            padding: 5%;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #b8c2fa;
+            margin-bottom: 5%;
+        }
+        .top-header {
+            text-align: center;
+            margin: 30px;
+        }
+        .input-field {
+            margin-bottom: 10px;
+        }
+        .submit-btn {
+            float: right;
+            height: 50px;
+            width: 100px;
+        }
+    </style>
+</html>

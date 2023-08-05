@@ -6,6 +6,7 @@ from . import helper
 from .forms import student_form
 from django.db.models.functions import ExtractMonth
 from . import const
+import json
 
 # Create your views here.
 def home(request):
@@ -18,8 +19,20 @@ def classroomSummary(request):
         selectedClass = request.GET.get('selectedClass')
         print(selectedClass)
         students = helper.get_all_students_from_class(selectedClass)
-        print(students, 'Nikhil')
-        return render(request, 'classroom-summary.html', {'students':students})
+        total_students = len(students)
+        amount_due = 0
+        number_of_students_with_clear_dues = 1
+        number_of_students_with_unclear_dues = 4
+
+        return render(
+            request, 'classroom-summary.html', {
+                'students': students,
+                'totalStudents': total_students,
+                'amountDue': amount_due,
+                'numberOfStudentsWithClearDues': number_of_students_with_clear_dues,
+                'numberOfStudentsWithUnclearDues': number_of_students_with_unclear_dues,
+            }
+        )
     else:
         return render(request, 'classroom-summary.html')
 
@@ -84,3 +97,31 @@ def profilePage(request):
                 flag=0
         if flag==0:
             return HttpResponse("The username is not valid")
+
+def feesRecordFormPage(request):
+    if request.method == 'POST':
+        print(request.POST)
+        name = request.POST.get('name')
+        roll = request.POST.get('roll')
+        selectedClass = request.POST.get('selectedClass')
+        date = request.POST.get('date')
+        month = request.POST.get('selectedMonth')
+        amount = request.POST.get('amount')
+
+        # Collecting subjects
+        # TODO: Add validator for subjects.
+        subjects = request.POST.getlist('subjects')
+        jsonified_subjects = json.dumps(subjects)
+        print(subjects, jsonified_subjects)
+        # if subjects is not None:
+            # print(subjects, jsonified_subjects)
+
+        helper.add_fee_to_datastore(
+            name, roll, selectedClass, date, month, amount, jsonified_subjects)
+
+    return render(request, 'fees-record-form.html')
+
+
+def monthlyStatsPage(request):
+    helper.get_current_month_fees_objects()
+    return render(request, 'monthly-stats.html')

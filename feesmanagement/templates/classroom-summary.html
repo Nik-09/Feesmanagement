@@ -2,17 +2,57 @@
 <html>
     <head>
         <title>Classroom Summary</title>
+        <link rel="icon" type="images/x-icon" href="../static/icons/A2-logo.jpg" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <h1 class="top-header">Classroom Summary Page</h1>
+        <div class="pie-chart-parent-class">
+            <div class="pie-chart">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="pie-chart-sister-class">
+                <strong>Total Students:</strong><i>  {{totalStudents}}</i><br><br>
+                <strong>Total students without fees dues:</strong><i>  {{numberOfStudentsWithUnclearDues}}</i><br><br>
+                <strong>Total stduents with fees dues</strong><i>  {{numberOfStudentsWithClearDues}}</i><br><br>
+                <strong>Total amount due:</strong><i>  {{amountDue}}</i><br><br>
+            </div>
+        </div>
+
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+          <script>
+            const ctx = document.getElementById('myChart');
+
+            new Chart(ctx, {
+              type: 'pie',
+              data: {
+                labels: ['Student with Dues', 'Student without Dues'],
+                datasets: [{
+                  label: 'students',
+                  data: [
+                    {{numberOfStudentsWithClearDues}},
+                    {{numberOfStudentsWithUnclearDues}}
+                  ],
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+          </script>
         <div class="div-table">
             <table class="table">
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Class</th>
+                        <th>Amount</th>
                         <th>Pending months</th>
                         <th>Profile</th>
                     </tr>
@@ -21,7 +61,7 @@
                     {% for student in students %}
                         <tr>
                             <td>{{student.student_name}}</td>
-                            <td>{{student.student_class}}</td>
+                            <td>{{student.fees_amount}}</td>
                             <td>{{student.pending_months}}</td>
                             <td><button class="btn btn-primary">View profile</button></td>
                         </tr>
@@ -31,9 +71,22 @@
         </div>
     </body>
     <style>
+        .pie-chart-sister-class {
+            margin: 50px;
+        }
+        .pie-chart-parent-class {
+            display: flex;
+            justify-content: space-around;
+        }
+        .pie-chart {
+            height: 300px;
+            width: 300px;
+        }
         .div-table {
             width: 90%;
             padding: 5%;
+            margin-left: auto;
+            margin-right: auto;
         }
         .top-header {
             text-align: center;

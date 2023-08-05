@@ -152,3 +152,15 @@ class StudentClassTwelveScience(BaseStudentModel):
     november_fees_date = models.DateField(null=True, blank=True)
     january_fees_date = models.DateField(null=True, blank=True)
     february_fees_date = models.DateField(null=True, blank=True)
+
+
+class FeesRecord(models.Model):
+    date = models.DateField(null=True)
+    amount = models.IntegerField(null=True)
+    month = models.CharField(null=True, max_length=10)
+    standard = models.IntegerField()
+    name = models.CharField(null=True, max_length=40)
+    subjects = models.CharField(null=True, max_length=200)
+
+    def __str__(self) -> str:
+        return self.name + '--' + self.month
