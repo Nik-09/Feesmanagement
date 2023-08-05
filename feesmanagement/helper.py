@@ -1,8 +1,26 @@
 from .models import *
 from .constants import *
 
-def get_student_by_roll(roll_number):
-    pass
+def get_student_by_name(class_standard):
+    if class_standard == '8':
+        students = StudentClassEight.objects.all()
+    elif class_standard == '9':
+        students = StudentClassNine.objects.all()
+    elif class_standard == '10':
+        students = StudentClassTen.objects.all()
+    elif class_standard == '11 commerce':
+        students = StudentClassElevenCommerce.objects.all()
+    elif class_standard == '11 science':
+        students = StudenClassElevenScience.objects.all()
+    elif class_standard == '12 commerce':
+        students = StudentClassTwelveCommerce.objects.all()
+    elif class_standard == '12 science':
+        students = StudentClassTwelveScience.objects.all()
+    else:
+        raise Exception('Class not found')
+
+    return students
+
 
 def _get_students_metadata_dict(stduents):
     students_metadata_dicts = []

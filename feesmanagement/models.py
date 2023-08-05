@@ -19,7 +19,7 @@ class BaseStudentModel(models.Model):
     subjects = models.CharField(max_length=200, null=True)
 
     def __str__(self) -> str:
-        return self.student_name + " " + str(self.id)
+        return self.student_name
 
 
 
