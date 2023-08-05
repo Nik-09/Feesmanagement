@@ -1,0 +1,170 @@
+.summary-submit-button {
+    width: 100%;
+    margin-top: 20px;
+}
+.admin-navigate-button {
+    width: 100%;
+    margin-top: 20px;
+}
+.select-label {
+    margin-bottom: 5%;
+    font-weight: bold;
+}
+.search-profile {
+    width: 33%;
+    margin-right: 15px;
+    background: #b8c2fa;
+    padding: 3%;
+}
+.classroom-summary {
+    width: 33%;
+    margin-right: 15px;
+    background: #b8c2fa;
+    padding: 3%;
+}
+.admin-controls {
+    width: 33%;
+    margin-right: 15px;
+    background: #b8c2fa;
+    padding: 3%;
+}
+.parent-body {
+    display: flex;
+    margin: 7%;
+    height: 300px;
+}
+.top-header {
+    text-align: center;
+    margin: 30px;
+}
+.A2-logo {
+    width: 5%;
+}
+
+.study1-container {
+    display: flex;
+}
+.study1-image {
+    height: 50%;
+    width: 50%;
+}
+body {
+    background-color: white;
+    margin: 1%;
+}
+.a2-logo {
+    width: 8%;
+    margin-left: 50px;
+}
+.a2-name {
+    margin: auto;
+}
+.nav-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+.login-btn {
+    height: 10%;
+    width: 8%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.logout-btn {
+    height: 10%;
+    width: 8%;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: none;
+}
+.study1-para {
+    font-size: larger;
+    font-family: sans-serif;
+    width: 30%;
+    height: 300px;
+}
+.tagline {
+    font-size: xx-large;
+    font-family: sans-serif;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.promotion-cards {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 5%;
+}
+.heading {
+    font-weight: bold;
+    font-size: xx-large;
+    display: inherit;
+    text-align: center;
+    margin-bottom: 50px
+}
+.content {
+
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    color: #818181;
+    display: block;
+    font-size: unset;
+    transition: 0.3s;
+  }
+  .navbar-option {
+    font-size: medium;
+  }
+
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    height: 10%;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .openbtn:hover {
+    background-color: #444;
+  }
+
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
