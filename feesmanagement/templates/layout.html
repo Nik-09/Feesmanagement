@@ -24,19 +24,32 @@
         <nav>
             <div id="mySidebar" class="sidebar">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-                <a class="navbar-option" href="#">Search Student</a>
+                <!-- <a class="navbar-option" href="#">Search Student</a> -->
+                {% if request.session.logged_in %}
                 <a class="navbar-option" href="#">Classroom Summary</a>
-                <a class="navbar-option" href="#">Admin Controls</a>
+                <a class="navbar-option" href="/admin">Admin Controls</a>
                 <a class="navbar-option" href="/fees-record-form">Fees Record Update Form</a>
-                <a class="navbar-option" href="#">Monthly Statistics</a>
+                {% endif %}
                 <a class="navbar-option" href="#">Profile Page</a>
+                {% if not request.session.logged_in %}
+                <a class="navbar-option login-btn-mobile" href="/login">Teacher Login</a>
+                {% else %}
+                <a class="navbar-option login-btn-mobile" href="/logout">Logout</a>
+                {% endif %}
             </div>
             <div class="nav-container">
                 <button class="openbtn btn btn-primary" onclick="openNav()">☰</button>
-                <img src="{% static 'A2-logo.jpg' %}" class="a2-logo">
-                <h1 class="a2-name">Study @ A<sup>2</sup></h1>
-                <button class="btn btn-primary login-btn">Login</button>
-                <button class="btn btn-primary logout-btn">Logout</button>
+                <a href="/" class="a2-logo">
+                    <img class="a2-logo-image" src="{% static 'A2-logo.jpg' %}">
+                </a>
+                <h1 class="a2-name">
+                    <strong>Study @ A<sup>2</sup></strong>
+                </h1>
+                {% if not request.session.logged_in %}
+                <a class="btn login-btn-desktop" href="/login">Teacher Login</a>
+                {% else %}
+                <a class="btn login-btn-desktop" href="/logout">Logout</a>
+                {% endif %}
             </div>
         </nav>
 

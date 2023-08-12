@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -164,3 +165,11 @@ class FeesRecord(models.Model):
 
     def __str__(self) -> str:
         return self.name + '--' + self.month
+
+class Teacher(User):
+    class Meta:
+        verbose_name = 'Teacher'
+        verbose_name_plural = 'Teachers'
+
+    def __str__(self) -> str:
+        return self.username

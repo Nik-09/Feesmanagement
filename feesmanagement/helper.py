@@ -2,6 +2,7 @@ import logging
 from .models import *
 from .constants import *
 import datetime
+from django.http import Http404
 
 def get_student_by_roll(roll_number):
     pass
@@ -101,3 +102,11 @@ def get_current_month_fees_objects():
         's_all_subjects': s_all_subjects,
         's_only_science_subjects': s_only_science_subjects
     }
+
+def validate_teacher(username, password):
+    try:
+        teacher = Teacher.objects.get(username=username)
+        if teacher.password != password:
+            raise Exception
+    except:
+        raise Exception

@@ -58,3 +58,27 @@ def feesRecordFormPage(request):
 def monthlyStatsPage(request):
     helper.get_current_month_fees_objects()
     return render(request, 'monthly-stats.html')
+
+
+def login(request):
+    print('test')
+    if request.method == 'GET':
+        return render(request, 'login.html')
+    else:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            helper.validate_teacher(username, password)
+            request.session['logged_in'] = True
+            print(request)
+            return render(request, 'home.html')
+        except:
+            custom_404(request, 'Error')
+
+def logout(request):
+    request.session.clear()
+    return render(request, 'home.html')
+
+def custom_404(request, exception):
+    print('Inside custom 404')
+    return render(request, '404.html', status=404)

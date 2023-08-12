@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    Home Page
+{% endblock %}
+
+{% block main %}
+    <div class="form-container shadow p-3 mb-5 bg-white rounded">
+        <div class="form-header">
+            <h2>Login form</h2>
+        </div>
+        <div class="form-body">
+            <form action="/login" method="POST" onsubmit="hello()">{% csrf_token %}
+                <label>Username: </label>
+                <input type="text" placeholder="username" class="form-control login-username-input" name="username" required>
+                <label>Password: </label>
+                <input type="password" class="form-control login-password-input" name="password" placeholder="password" required>
+                <input type="submit" class="btn btn-success login-submit-button">
+            </form>
+        </div>
+    </div>
+{% endblock %}

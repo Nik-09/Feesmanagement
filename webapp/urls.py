@@ -22,3 +22,5 @@ urlpatterns = [
     path('', include('feesmanagement.urls')),
     path('feesmanagement', include('feesmanagement.urls'))
 ]
+
+handler404 = 'feesmanagement.views.custom_404'
