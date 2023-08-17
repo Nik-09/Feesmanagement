@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    Classroom Summary
+{% endblock %}
+
+{% block main %}
+    <h1 class="top-header">Classroom Summary</h1>
+    <div class="parent-form-container shadow p-3 mb-5 bg-white rounded">
+        <form action="/classroom-summary" method="GET">{% csrf_token %}
+            <select name="selectedClass" class="form-select select-dropdown">
+                <option disabled selected value> -- Select a class -- </option>
+                <option value="eight">Class 8</option>
+                <option value="nine">Class 9</option>
+                <option value="ten">Class 10</option>
+                <option value="eleven-commerce">Class 11 Commerce</option>
+                <option value="eleven-science">Class 11 Science</option>
+                <option value="twelve-commerce">Class 12 Commerce</option>
+                <option value="twelve-science">Class 12 Science</option>
+            </select>
+            <input type="submit" value="Select" class="btn btn-success summary-submit-button">
+        </form>
+    </div>
+{% endblock %}
