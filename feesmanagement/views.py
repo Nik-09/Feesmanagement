@@ -7,6 +7,9 @@ import json
 def home(request):
     return render(request, 'home.html')
 
+def classroomSummaryForm(request):
+    return render(request, 'classroom-summary-form.html')
+
 def classroomSummary(request):
     if request.method == 'GET':
         selectedClass = request.GET.get('selectedClass')
@@ -61,7 +64,6 @@ def monthlyStatsPage(request):
 
 
 def login(request):
-    print('test')
     if request.method == 'GET':
         return render(request, 'login.html')
     else:
@@ -70,7 +72,6 @@ def login(request):
         try:
             helper.validate_teacher(username, password)
             request.session['logged_in'] = True
-            print(request)
             return render(request, 'home.html')
         except:
             custom_404(request, 'Error')

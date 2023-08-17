@@ -44,12 +44,13 @@
             </select>
             <label>Amount: </label>
             <input type="number" name="amount" class="form-control input-field" required>
-            <div class="input-field">
+            <div class="input-field" onclick="validateSubjects()">
                 <p>Secondary section</p>
                 <input type="checkbox" id="all" class="form-check-input" name="subjects" value="all">
                 <label for="all">All</label>
                 <input type="checkbox" id="science" class="form-check-input" name="science" value="science">
                 <label for="science">Science</label>
+                <br><br>
                 <p>Or Higher Secondary (Science)</p>
                 <input type="checkbox" id="biology" class="form-check-input" name="subjects" value="biology">
                 <label for="biology">Biology</label>
@@ -59,6 +60,7 @@
                 <label for="physics">Physics</label>
                 <input type="checkbox" id="math" class="form-check-input" name="subjects" value="math">
                 <label for="math">Maths</label>
+                <br><br>
                 <p>Or Higher Secondary (Commerce)</p>
                 <input type="checkbox" id="accounts" class="form-check-input" name="subjects" value="accounts">
                 <label for="accounts">Accounts</label>
