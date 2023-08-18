@@ -7,12 +7,16 @@ from .forms import student_form
 from django.db.models.functions import ExtractMonth
 from . import const
 import json
+import datetime
 
 # Create your views here.
 def home(request):
+    return render(request, 'home.html')
+
+def profile_visit(request):
     form={}
     form['form']=student_form()
-    return render(request, 'home.html', form)
+    return render(request, 'student-profile.html', form)
 
 def classroomSummary(request):
     if request.method == 'GET':
@@ -52,51 +56,64 @@ def profilePage(request):
     if request.method == 'POST':
         name = request.POST.get('Name')
         selectedClass = request.POST.get('Class')
-        students = helper.get_student_by_name(selectedClass)
-        flag =1
-        for student in students:
-            student_dict = {}
-            fees = {}
-            if student.student_name == name:
-                student_dict['student_name'] = student.student_name
-                student_dict['student_class'] = student.student_class
-                student_dict['pending_months'] = 3
-                student_dict['student_roll'] = student.student_roll
-                student_dict['joining_date']=student.joining_date
-                student_dict['fees_amount']=student.fees_amount
-                student_dict['school_name']=student.school_name
-                student_dict['january_fees_date']=student.january_fees_date
-                student_dict['february_fees_date']=student.february_fees_date
-                student_dict['march_fees_date']=student.march_fees_date
-                student_dict['april_fees_date']=student.april_fees_date
-                student_dict['may_fees_date']=student.may_fees_date
-                student_dict['june_fees_date']=student.june_fees_date
-                student_dict['july_fees_date']=student.july_fees_date
-                student_dict['august_fees_date']=student.august_fees_date
-                student_dict['september_fees_date']=student.september_fees_date
-                student_dict['october_fees_date']=student.october_fees_date
-                student_dict['november_fees_date']=student.november_fees_date
-                student_dict['december_fees_date']=student.december_fees_date
-                fees[1]=student.january_fees_date
-                fees[2]=student.february_fees_date
-                fees[3]=student.march_fees_date
-                fees[4]=student.april_fees_date
-                fees[5]=student.may_fees_date
-                fees[6]=student.june_fees_date
-                fees[7]=student.july_fees_date
-                fees[8]=student.august_fees_date
-                fees[9]=student.september_fees_date
-                fees[10]=student.october_fees_date
-                fees[11]=student.november_fees_date
-                fees[12]=student.december_fees_date
-
-                print(fees[4])
-                month = const.month
-                return render(request, 'profile.html', {'student_dict':student_dict, 'month':month, 'fees': fees})
-            else:
-                flag=0
+        student = helper.get_student_by_name(selectedClass, name)
+        flag = 1
+        fees = {}
+        student_dict ={}
+        student_fees ={}
+        sum=0
+        student_fees= helper.get_monthly_status(
+        student, selectedClass)
+        # print(student.joining_date.month)
+        # for key in student_fees:
+        #     if student_fees[key] == None and key <= student.joining_date.month:
+        #         sum = sum+1
+        student_dict['student_name'] = student.student_name
+        student_dict['student_image']=student.student_image
+        student_dict['student_class'] = student.student_class
+        student_dict['student_roll'] = student.student_roll
+        student_dict['joining_date']=student.joining_date
+        student_dict['fees_amount']=student.fees_amount
+        student_dict['school_name']=student.school_name
+        student_dict['guardian_mobile_number']=student.guardian_mobile_number
+        student_dict['student_mobile_number']=student.student_mobile_number
+        fees_color={}
+        list_of_dict = []
+        integer = 0
+        month = const.month
+        current_month = datetime.datetime.now()
+        current_date = datetime.datetime.now()
+        print(student.joining_date.strftime("%d"))
+        for key in student_fees:
+            variable = {}
+            if student_dict['joining_date'].month > key:
+                variable['grey'] = month[key]
+            elif student_dict['joining_date'].month == key:
+                if student.joining_date.strftime("%d") <= '20' and student_fees[key]==None:
+                    variable['red'] = month[key]
+                    sum=sum+1
+                elif student_fees[key]!=None:
+                    variable['green']= month[key]
+                else:
+                    variable['grey']=month[key]
+            elif student_dict['joining_date'].month < key:
+                if student_fees[key] != None:
+                    variable['green'] = month[key]
+                elif current_month.strftime("%B")==month[key] and student_fees[key] == None:
+                    variable['red'] = month[key]
+                    sum=sum+1
+                else:
+                    variable['grey'] = month[key]
+            list_of_dict.append(variable)
+            students =list_of_dict
+        student_dict['pending_months']=sum
+        print(students)
+        return render(request, 'profile.html', {'students':students, 'student_dict': student_dict})
+            # # elif student.student_name == name and (student.student_class==8 or student.student_class==9 or student.student_class==)
+            # else:
+            #     flag=0
         if flag==0:
-            return HttpResponse("The username is not valid")
+            return render(request, 'home.html')
 
 def feesRecordFormPage(request):
     if request.method == 'POST':
@@ -125,3 +142,53 @@ def feesRecordFormPage(request):
 def monthlyStatsPage(request):
     helper.get_current_month_fees_objects()
     return render(request, 'monthly-stats.html')
+
+
+
+
+            # if student.student_name == name and(student.student_class==8 or ):
+                # fees[1]=student.january_fees_date
+                # fees[2]=student.february_fees_date
+                # fees[3]=student.march_fees_date
+                # fees[4]=student.april_fees_date
+                # fees[5]=student.may_fees_date
+                # fees[6]=student.june_fees_date
+                # fees[7]=student.july_fees_date
+                # fees[8]=student.august_fees_date
+                # fees[9]=student.september_fees_date
+                # fees[10]=student.october_fees_date
+                # fees[11]=student.november_fees_date
+                # fees[12]=student.december_fees_date
+                # for key in fees:
+                #     if fees[key] != None:
+                #         sum = sum+1
+                # student_dict['student_name'] = student.student_name
+                # student_dict['student_class'] = student.student_class
+                # student_dict['pending_months'] = sum
+                # student_dict['student_roll'] = student.student_roll
+                # student_dict['joining_date']=student.joining_date
+                # student_dict['fees_amount']=student.fees_amount
+                # student_dict['school_name']=student.school_name
+                # student_dict['january_fees_date']=student.january_fees_date
+                # student_dict['february_fees_date']=student.february_fees_date
+                # student_dict['march_fees_date']=student.march_fees_date
+                # student_dict['april_fees_date']=student.april_fees_date
+                # student_dict['may_fees_date']=student.may_fees_date
+                # student_dict['june_fees_date']=student.june_fees_date
+                # student_dict['july_fees_date']=student.july_fees_date
+                # student_dict['august_fees_date']=student.august_fees_date
+                # student_dict['september_fees_date']=student.september_fees_date
+                # student_dict['october_fees_date']=student.october_fees_date
+                # student_dict['november_fees_date']=student.november_fees_date
+                # student_dict['december_fees_date']=student.december_fees_date
+
+
+
+                       # for key in student_fees:
+        #     if student_dict['joining_date'].month > key:
+        #         variable['color'+ str(integer)]='grey'
+        #         variable['value'+ str(integer)]=month[key]
+        #     elif student_dict['joining_date'].month < key and student_fees[key] != None:
+        #         variable['color' + str(integer)]='Green'
+        #         variable['value' + str(integer)]=month[key]
+        #     integer=integer+1

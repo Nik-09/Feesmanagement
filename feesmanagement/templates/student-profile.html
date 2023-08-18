@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}
+    Home Page
+{% endblock %}
+
+{% block main %}
+<body>
+    <h1 class="top-header">Student Profile Form</h1>
+    <div class="parent-form-container shadow p-5 mb-3 white rounded" >
+        <div class="search-profile" style="background-color: aliceblue;">
+            <form action="/profilePage" , method="post">
+                {% csrf_token %}
+                {{form}}
+                <input type="submit" value="submit" class="btn btn-success summary-submit-button">
+            </form>
+        </div>
+    </div>
+</body>
+    <!-- <body>
+        <h1 class="top-header">Student Profile Form</h1>
+        <div class="form-container p-3 mb-5 bg-white rounded>
+            <div class="search-profile card">
+                <form action="/profilePage" , method="POST">
+                    {% csrf_token %}
+                    {{form}}
+                    <input type="submit" value="Submit" class="btn btn-success summary-submit-button">
+                </form>
+            </div>
+        </div>
+    </body> -->
+<style>
+    /* .Student-profile-body {
+        width: 40%;
+        border: 0px solid;
+        border-radius: 10px;
+        padding: 5%;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #b8c2fa;
+        margin-bottom: 5%;
+    /* }
+    .summary-submit-button {
+    width: 40%;
+    margin-top: 20px;
+    }
+    .search-profile {
+        width: 89%;
+        margin-right: 15px;
+        background: #b8c2fa;
+        padding: 11%;
+        border: aliceblue;
+    }
+    .h1 {
+        text-align: center;
+    } */
+</style>
+{% endblock %}

@@ -3,25 +3,119 @@ from .models import *
 from .constants import *
 import datetime
 
-def get_student_by_name(class_standard):
+def get_student_by_name(class_standard, name):
     if class_standard == '8':
-        students = StudentClassEight.objects.all()
+        student = StudentClassEight.objects.get(student_name=name)
     elif class_standard == '9':
-        students = StudentClassNine.objects.all()
+        student = StudentClassNine.objects.get(student_name=name)
     elif class_standard == '10':
-        students = StudentClassTen.objects.all()
+        student = StudentClassTen.objects.get(student_name=name)
     elif class_standard == '11 commerce':
-        students = StudentClassElevenCommerce.objects.all()
+        student = StudentClassElevenCommerce.objects.get(student_name=name)
     elif class_standard == '11 science':
-        students = StudenClassElevenScience.objects.all()
+        student = StudenClassElevenScience.objects.get(student_name=name)
     elif class_standard == '12 commerce':
-        students = StudentClassTwelveCommerce.objects.all()
+        student = StudentClassTwelveCommerce.objects.get(student_name=name)
     elif class_standard == '12 science':
-        students = StudentClassTwelveScience.objects.all()
+        student = StudentClassTwelveScience.objects.get(student_name=name)
     else:
-        raise Exception('Class not found')
+        raise Exception('Student not found')
 
-    return students
+    return student
+
+def get_monthly_status(student, standard):
+    student_dict={}
+    if standard == '8':
+        student_dict[1]=student.january_fees_date
+        student_dict[2]=student.february_fees_date
+        student_dict[3]=student.march_fees_date
+        student_dict[4]=student.april_fees_date
+        student_dict[5]=student.may_fees_date
+        student_dict[6]=student.june_fees_date
+        student_dict[7]=student.july_fees_date
+        student_dict[8]=student.august_fees_date
+        student_dict[9]=student.september_fees_date
+        student_dict[10]=student.october_fees_date
+        student_dict[11]=student.november_fees_date
+        student_dict[12]=student.december_fees_date
+    elif standard == '9':
+        student_dict['january_fees_date']=student.january_fees_date
+        student_dict['february_fees_date']=student.february_fees_date
+        student_dict['march_fees_date']=student.march_fees_date
+        student_dict['april_fees_date']=student.april_fees_date
+        student_dict['may_fees_date']=student.may_fees_date
+        student_dict['june_fees_date']=student.june_fees_date
+        student_dict['july_fees_date']=student.july_fees_date
+        student_dict['august_fees_date']=student.august_fees_date
+        student_dict['september_fees_date']=student.september_fees_date
+        student_dict['october_fees_date']=student.october_fees_date
+        student_dict['november_fees_date']=student.november_fees_date
+        student_dict['december_fees_date']=student.december_fees_date
+    elif standard == '10':
+        student_dict['december_fees_date']=student.december_fees_date
+        student_dict['january_fees_date']=student.january_fees_date
+        student_dict['february_fees_date']=student.february_fees_date
+        student_dict['march_fees_date']=student.march_fees_date
+        student_dict['april_fees_date']=student.april_fees_date
+        student_dict['may_fees_date']=student.may_fees_date
+        student_dict['june_fees_date']=student.june_fees_date
+        student_dict['july_fees_date']=student.july_fees_date
+        student_dict['august_fees_date']=student.august_fees_date
+        student_dict['september_fees_date']=student.september_fees_date
+        student_dict['october_fees_date']=student.october_fees_date
+        student_dict['november_fees_date']=student.november_fees_date
+    elif standard == '11 commerce':
+        student_dict[4]=student.april_fees_date
+        student_dict[5]=student.may_fees_date
+        student_dict[6]=student.june_fees_date
+        student_dict[7]=student.july_fees_date
+        student_dict[8]=student.august_fees_date
+        student_dict[9]=student.september_fees_date
+        student_dict[10]=student.october_fees_date
+        student_dict[11]=student.november_fees_date
+        student_dict[12]=student.december_fees_date
+        student_dict[13]=student.january_fees_date
+        student_dict[14]=student.february_fees_date
+
+    elif standard ==  '11 science':
+        student_dict['april_fees_date']=student.april_fees_date
+        student_dict['may_fees_date']=student.may_fees_date
+        student_dict['june_fees_date']=student.june_fees_date
+        student_dict['july_fees_date']=student.july_fees_date
+        student_dict['august_fees_date']=student.august_fees_date
+        student_dict['september_fees_date']=student.september_fees_date
+        student_dict['october_fees_date']=student.october_fees_date
+        student_dict['november_fees_date']=student.november_fees_date
+        student_dict['december_fees_date']=student.december_fees_date
+        student_dict['january_fees_date']=student.january_fees_date
+        student_dict['february_fees_date']=student.february_fees_date
+
+    elif standard ==  '12 commerce':
+        student_dict['april_fees_date']=student.april_fees_date
+        student_dict['may_fees_date']=student.may_fees_date
+        student_dict['june_fees_date']=student.june_fees_date
+        student_dict['july_fees_date']=student.july_fees_date
+        student_dict['august_fees_date']=student.august_fees_date
+        student_dict['september_fees_date']=student.september_fees_date
+        student_dict['october_fees_date']=student.october_fees_date
+        student_dict['november_fees_date']=student.november_fees_date
+        student_dict['december_fees_date']=student.december_fees_date
+        student_dict['january_fees_date']=student.january_fees_date
+        student_dict['february_fees_date']=student.february_fees_date
+
+    elif standard == '12 science':
+        student_dict['april_fees_date']=student.april_fees_date
+        student_dict['may_fees_date']=student.may_fees_date
+        student_dict['june_fees_date']=student.june_fees_date
+        student_dict['july_fees_date']=student.july_fees_date
+        student_dict['august_fees_date']=student.august_fees_date
+        student_dict['september_fees_date']=student.september_fees_date
+        student_dict['october_fees_date']=student.october_fees_date
+        student_dict['november_fees_date']=student.november_fees_date
+        student_dict['december_fees_date']=student.december_fees_date
+        student_dict['january_fees_date']=student.january_fees_date
+        student_dict['february_fees_date']=student.february_fees_date
+    return student_dict
 
 
 def _get_pending_months():

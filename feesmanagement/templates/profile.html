@@ -1,15 +1,93 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Profile page</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div class="div-table">
-       <h1 class="top-header">Profile Page</h1>
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}
+    Home Page
+{% endblock %}
 
-        <p><b>Name: </b>{{student_dict.student_name}}</p>
+{% block main %}
+    <body>
+        <h1 class="top-header">Profile Page</h1>
+        <div class="col-md-8">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Full Name</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{student_dict.student_name}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Class</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{student_dict.student_class}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Phone</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{student_dict.student_mobile_number}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Guardian Number</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{student_dict.guardian_mobile_number}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Roll Number</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{student_dict.student_roll}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                <div class="col-sm-3">
+                    <h6 class="mb-0">Joining Date</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                    {{student_dict.joining_date}}
+                </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">fees amount</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{student_dict.fees_amount}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">School Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{student_dict.school_name}}
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- <div class="row">
+        <div class="col-sm-3">
+       <div><p><b>Name: </b>{{student_dict.student_name}}</p></div>
 
         <p><b>Class: </b> {{student_dict.student_class}}</p>
 
@@ -28,27 +106,25 @@
         <p><b>Guardian Phone Number: </b> {{student_dict.guardian_mobile_number}}</p>
 
         </div>
+        </div> -->
         <div class="flex-container">
-        {% for key, value in month.items %}
-            {% if student_dict.joining_date.month > key  %}
-            <div class="small-container" style="background-color: grey;">
-                <p>{{value}}</p>
-            </div>
-            {% endif %}
-        {% endfor %}
-        {% for key_of_fee, value_of_fee in fees.items %}
-            {% if key_of_fee >= student_dict.joining_date.month %}
-                {% if value_of_fee != None %}
-                    <div class="small-container" style="background-color: aqua;">
-                        <p>{{value_of_fee}}</p>
-                    </div>
-                {% else %}
-                    <div class="small-container" style="background-color:#e8696d;">
-                        <p>Not Paid</p>
-                    </div>
-                {% endif %}
-            {% endif %}
-        {% endfor %}
+                {% for item in students %}
+                    {% for key, value in item.items %}
+                        {% if key == 'grey' %}
+                        <div class="small-container" style="background-color: grey;width: max-content;">
+                            <p style="width: 70px; margin-top: -4px;">{{ value }}</p>
+                        </div>
+                        {% elif key == 'green' %}
+                        <div class="small-container" style="background-color: rgb(114, 237, 102);">
+                            <p style="width: 70px; margin-top: -4px;">{{ value }}</p>
+                        </div>
+                        {% else %}
+                        <div class="small-container" style="background-color: rgb(231, 58, 58);">
+                            <p style="width: 70px; margin-top: -4px;">{{ value }}</p>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
         </div>
     </body>
     <style>
@@ -84,11 +160,15 @@
         height: auto;
         text-align: center;
         padding: 2%;
-        margin-left: 16%;
+        margin-left: -6%;
     }
 
     .small-container {
-        margin-right: 1%;
+        margin-right: 0.5%;
+        padding-inline: inherit;
+        padding-top: inherit;
+        border-radius: 10%;
+        width: max-content;
     }
     .div-table {
         display: flex;
@@ -104,5 +184,28 @@
         border-radius: 7%;
         margin:auto
 }
+    .div {
+        background-color: antiquewhite;
+    }
     </style>
-</html>
+{% endblock %}
+ <!-- {% for key, value in student_fees.items %}
+            {% if student_dict.joining_date.month > key %}
+            <div class="small-container" style="background-color: grey;">
+                <p>{{value}}</p>
+            </div>
+            {% endif %}
+        {% endfor %}
+        {% for key_of_fee, value_of_fee in student_fees.items %}
+            {% if key_of_fee >= student_dict.joining_date.month %}
+                {% if value_of_fee != None %}
+                    <div class="small-container" style="background-color: aqua;">
+                        <p>{{value_of_fee}}</p>
+                    </div>
+                {% else %}
+                    <div class="small-container" style="background-color:#e8696d;">
+                        <p>Not Paid</p>
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}

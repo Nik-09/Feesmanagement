@@ -8,6 +8,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 class BaseStudentModel(models.Model):
     # Student's personal data
     student_name = models.CharField(max_length=64)
+    student_image = models.ImageField()
     student_class = models.IntegerField(
         default=8, null=False, validators=[MinValueValidator(8), MaxValueValidator(12)])
     student_mobile_number = models.CharField(max_length=10, null=True)
@@ -70,7 +71,6 @@ class StudentClassTen(BaseStudentModel):
         verbose_name_plural = 'Class Ten Records'
 
     # Date for each month
-    december_fees_date = models.DateField(null=True, blank=True)
     january_fees_date = models.DateField(null=True, blank=True)
     february_fees_date = models.DateField(null=True, blank=True)
     march_fees_date = models.DateField(null=True, blank=True)
@@ -82,6 +82,7 @@ class StudentClassTen(BaseStudentModel):
     september_fees_date = models.DateField(null=True, blank=True)
     october_fees_date = models.DateField(null=True, blank=True)
     november_fees_date = models.DateField(null=True, blank=True)
+    december_fees_date = models.DateField(null=True, blank=True)
     january_fees_date = models.DateField(null=True, blank=True)
     february_fees_date = models.DateField(null=True, blank=True)
 
@@ -99,6 +100,7 @@ class StudentClassElevenCommerce(BaseStudentModel):
     september_fees_date = models.DateField(null=True, blank=True)
     october_fees_date = models.DateField(null=True, blank=True)
     november_fees_date = models.DateField(null=True, blank=True)
+    december_fees_date = models.DateField(null=True, blank=True)
     january_fees_date = models.DateField(null=True, blank=True)
     february_fees_date = models.DateField(null=True, blank=True)
 
@@ -116,6 +118,7 @@ class StudenClassElevenScience(BaseStudentModel):
     september_fees_date = models.DateField(null=True, blank=True)
     october_fees_date = models.DateField(null=True, blank=True)
     november_fees_date = models.DateField(null=True, blank=True)
+    december_fees_date = models.DateField(null=True, blank=True)
     january_fees_date = models.DateField(null=True, blank=True)
     february_fees_date = models.DateField(null=True, blank=True)
 
@@ -133,6 +136,7 @@ class StudentClassTwelveCommerce(BaseStudentModel):
     september_fees_date = models.DateField(null=True, blank=True)
     october_fees_date = models.DateField(null=True, blank=True)
     november_fees_date = models.DateField(null=True, blank=True)
+    december_fees_date = models.DateField(null=True, blank=True)
     january_fees_date = models.DateField(null=True, blank=True)
     february_fees_date = models.DateField(null=True, blank=True)
 
@@ -150,6 +154,7 @@ class StudentClassTwelveScience(BaseStudentModel):
     september_fees_date = models.DateField(null=True, blank=True)
     october_fees_date = models.DateField(null=True, blank=True)
     november_fees_date = models.DateField(null=True, blank=True)
+    december_fees_date = models.DateField(null=True, blank=True)
     january_fees_date = models.DateField(null=True, blank=True)
     february_fees_date = models.DateField(null=True, blank=True)
 
