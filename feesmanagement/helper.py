@@ -60,7 +60,15 @@ def add_fee_to_datastore(
     fees.save()
     # Add this fees to the profile of the individual student.
 
-
+def _get_student_fees_details(fees_object):
+    student = {}
+    student['name'] = fees_object.name
+    student['date'] = fees_object.date
+    student['amount'] = fees_object.amount
+    student['standard'] = fees_object.standard
+    student['subjects'] = fees_object.subjects
+    student['month'] = fees_object.month
+    return student
 
 def get_current_month_fees_objects():
     current_date_object = datetime.date.today()
@@ -79,29 +87,59 @@ def get_current_month_fees_objects():
     fees_objects = FeesRecord.objects.filter(
         date__gte=month_beginning_date, date__lte=current_date)
 
-    # hs prefix below means higher secondary
-    hs_chemistry_collection = 0
-    hs_physics_collection = 0
-    hs_maths_collection = 0
-    hs_biology_collection = 0
-    hs_economics_collection = 0
-    hs_business_studies_collection = 0
-    hs_accounts_collection = 0
-    # s prefix below means secondary
-    s_all_subjects = 0
-    s_only_science_subjects = 0
-
-    subject_wise_collection = {
-        'hs_chemistry_collection': hs_chemistry_collection,
-        'hs_physics_collection': hs_physics_collection,
-        'hs_maths_collection': hs_maths_collection,
-        'hs_biology_collection': hs_biology_collection,
-        'hs_economics_collection': hs_economics_collection,
-        'hs_business_studies_collection': hs_business_studies_collection,
-        'hs_accounts_collection': hs_accounts_collection,
-        's_all_subjects': s_all_subjects,
-        's_only_science_subjects': s_only_science_subjects
+    monthly_stats = {
+        'class_eight': [],
+        'class_nine': [],
+        'class_ten': [],
+        'class_eleven_science': [],
+        'class_eleven_commerce': [],
+        'class_twelve_science': [],
+        'class_twelve_commerce': []
     }
+
+    class_eight_collection = 0
+    class_nine_collection = 0
+    class_ten_collection = 0
+    class_eleven_science_collection = 0
+    class_twelve_science_collection = 0
+    class_eleven_commerce_collection = 0
+    class_twelve_commerce_collection = 0
+
+    for fee_object in fees_objects:
+        student_fee_dict = _get_student_fees_details(fee_object)
+        standard = student_fee_dict['standard']
+
+        if standard == MAP_CLASS_NAME_TO_INT[CLASS_EIGHT]:
+            class_eight_collection += student_fee_dict['amount']
+            monthly_stats['class_eight'].append(student_fee_dict)
+
+        elif standard == MAP_CLASS_NAME_TO_INT[CLASS_NINE]:
+            class_nine_collection += student_fee_dict['amount']
+            monthly_stats['class_nine'].append(student_fee_dict)
+
+        elif standard == MAP_CLASS_NAME_TO_INT[CLASS_TEN]:
+            class_ten_collection += student_fee_dict['amount']
+            monthly_stats['class_ten'].append(student_fee_dict)
+
+        elif standard == MAP_CLASS_NAME_TO_INT[CLASS_ELEVEN_COMMERCE]:
+            class_eleven_commerce_collection += student_fee_dict['amount']
+            monthly_stats['class_eleven_commerce'].append(student_fee_dict)
+
+        elif standard == MAP_CLASS_NAME_TO_INT[CLASS_ELEVEN_SCIENCE]:
+            class_eleven_science_collection += student_fee_dict['amount']
+            monthly_stats['class_eleven_science'].append(student_fee_dict)
+
+        elif standard == MAP_CLASS_NAME_TO_INT[CLSSS_TWELVE_COMMERCE]:
+            class_twelve_commerce_collection += student_fee_dict['amount']
+            monthly_stats['class_twelve_commerce'].append(student_fee_dict)
+
+        elif standard == MAP_CLASS_NAME_TO_INT[CLASS_TWELVE_SCIENCE]:
+
+            class_twelve_science_collection += student_fee_dict['amount']
+            monthly_stats['class_twelve_science'].append(student_fee_dict)
+
+    return monthly_stats
+
 
 def validate_teacher(username, password):
     try:

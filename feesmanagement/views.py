@@ -36,21 +36,14 @@ def profilePage(request):
 
 def feesRecordFormPage(request):
     if request.method == 'POST':
-        print(request.POST)
         name = request.POST.get('name')
         roll = request.POST.get('roll')
         selectedClass = request.POST.get('selectedClass')
         date = request.POST.get('date')
         month = request.POST.get('selectedMonth')
         amount = request.POST.get('amount')
-
-        # Collecting subjects
-        # TODO: Add validator for subjects.
         subjects = request.POST.getlist('subjects')
         jsonified_subjects = json.dumps(subjects)
-        print(subjects, jsonified_subjects)
-        # if subjects is not None:
-            # print(subjects, jsonified_subjects)
 
         helper.add_fee_to_datastore(
             name, roll, selectedClass, date, month, amount, jsonified_subjects)
@@ -59,8 +52,8 @@ def feesRecordFormPage(request):
 
 
 def monthlyStatsPage(request):
-    helper.get_current_month_fees_objects()
-    return render(request, 'monthly-stats.html')
+    monthly_stats = helper.get_current_month_fees_objects()
+    return render(request, 'monthly-stats.html', {'monthly_stats': monthly_stats})
 
 
 def login(request):

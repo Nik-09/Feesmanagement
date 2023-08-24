@@ -196,6 +196,11 @@ body {
     transition: margin-left .5s;
     padding: 16px;
   }
+  .class-card {
+    width: 32%;
+    border-radius: 10px;
+    height: 100px;
+  }
 
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
   @media only screen and (max-width: 768px) {
