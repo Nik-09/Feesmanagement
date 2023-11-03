@@ -8,7 +8,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 class BaseStudentModel(models.Model):
     # Student's personal data
     student_name = models.CharField(max_length=64)
-    student_image = models.ImageField()
     student_class = models.IntegerField(
         default=8, null=False, validators=[MinValueValidator(8), MaxValueValidator(12)])
     student_mobile_number = models.CharField(max_length=10, null=True)

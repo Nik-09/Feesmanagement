@@ -57,7 +57,7 @@ def profilePage(request):
         name = request.POST.get('Name')
         selectedClass = request.POST.get('Class')
         student = helper.get_student_by_name(selectedClass, name)
-        flag = 1
+        print('pritam')
         fees = {}
         student_dict ={}
         student_fees ={}
@@ -69,7 +69,6 @@ def profilePage(request):
         #     if student_fees[key] == None and key <= student.joining_date.month:
         #         sum = sum+1
         student_dict['student_name'] = student.student_name
-        student_dict['student_image']=student.student_image
         student_dict['student_class'] = student.student_class
         student_dict['student_roll'] = student.student_roll
         student_dict['joining_date']=student.joining_date
@@ -83,7 +82,9 @@ def profilePage(request):
         month = const.month
         current_month = datetime.datetime.now()
         current_date = datetime.datetime.now()
-        print(student.joining_date.strftime("%d"))
+        print(month[8])
+        if name != student.student_name:
+            return render(request, 'home.html')
         for key in student_fees:
             variable = {}
             if student_dict['joining_date'].month > key:
@@ -99,21 +100,16 @@ def profilePage(request):
             elif student_dict['joining_date'].month < key:
                 if student_fees[key] != None:
                     variable['green'] = month[key]
-                elif current_month.strftime("%B")==month[key] and student_fees[key] == None:
+                elif current_month.month >= key and student_fees[key] == None:
                     variable['red'] = month[key]
                     sum=sum+1
                 else:
-                    variable['grey'] = month[key]
+                    variable['grey']=month[key]
             list_of_dict.append(variable)
             students =list_of_dict
         student_dict['pending_months']=sum
         print(students)
         return render(request, 'profile.html', {'students':students, 'student_dict': student_dict})
-            # # elif student.student_name == name and (student.student_class==8 or student.student_class==9 or student.student_class==)
-            # else:
-            #     flag=0
-        if flag==0:
-            return render(request, 'home.html')
 
 def feesRecordFormPage(request):
     if request.method == 'POST':

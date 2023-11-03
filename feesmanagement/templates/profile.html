@@ -6,6 +6,7 @@
 
 {% block main %}
     <body>
+      <img class="watermark" src="{% static 'A2-logo.jpg' %}" alt="Image with watermark">
         <h1 class="top-header">Profile Page</h1>
         <div class="col-md-8">
             <div class="card mb-3">
@@ -187,6 +188,15 @@
     .div {
         background-color: antiquewhite;
     }
+    .watermark {
+  position: relative;
+}
+.watermark::after {
+  position: absolute;
+  bottom: 100;
+  right: 100;
+  content: "COPYRIGHT";
+}
     </style>
 {% endblock %}
  <!-- {% for key, value in student_fees.items %}

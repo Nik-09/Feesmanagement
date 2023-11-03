@@ -2,6 +2,7 @@ import logging
 from .models import *
 from .constants import *
 import datetime
+from django.http import Http404
 
 def get_student_by_name(class_standard, name):
     if class_standard == '8':
@@ -20,7 +21,6 @@ def get_student_by_name(class_standard, name):
         student = StudentClassTwelveScience.objects.get(student_name=name)
     else:
         raise Exception('Student not found')
-
     return student
 
 def get_monthly_status(student, standard):
@@ -39,31 +39,31 @@ def get_monthly_status(student, standard):
         student_dict[11]=student.november_fees_date
         student_dict[12]=student.december_fees_date
     elif standard == '9':
-        student_dict['january_fees_date']=student.january_fees_date
-        student_dict['february_fees_date']=student.february_fees_date
-        student_dict['march_fees_date']=student.march_fees_date
-        student_dict['april_fees_date']=student.april_fees_date
-        student_dict['may_fees_date']=student.may_fees_date
-        student_dict['june_fees_date']=student.june_fees_date
-        student_dict['july_fees_date']=student.july_fees_date
-        student_dict['august_fees_date']=student.august_fees_date
-        student_dict['september_fees_date']=student.september_fees_date
-        student_dict['october_fees_date']=student.october_fees_date
-        student_dict['november_fees_date']=student.november_fees_date
-        student_dict['december_fees_date']=student.december_fees_date
+        student_dict[1]=student.january_fees_date
+        student_dict[2]=student.february_fees_date
+        student_dict[3]=student.march_fees_date
+        student_dict[4]=student.april_fees_date
+        student_dict[5]=student.may_fees_date
+        student_dict[6]=student.june_fees_date
+        student_dict[7]=student.july_fees_date
+        student_dict[8]=student.august_fees_date
+        student_dict[9]=student.september_fees_date
+        student_dict[10]=student.october_fees_date
+        student_dict[11]=student.november_fees_date
+        student_dict[12]=student.december_fees_date
     elif standard == '10':
-        student_dict['december_fees_date']=student.december_fees_date
-        student_dict['january_fees_date']=student.january_fees_date
-        student_dict['february_fees_date']=student.february_fees_date
-        student_dict['march_fees_date']=student.march_fees_date
-        student_dict['april_fees_date']=student.april_fees_date
-        student_dict['may_fees_date']=student.may_fees_date
-        student_dict['june_fees_date']=student.june_fees_date
-        student_dict['july_fees_date']=student.july_fees_date
-        student_dict['august_fees_date']=student.august_fees_date
-        student_dict['september_fees_date']=student.september_fees_date
-        student_dict['october_fees_date']=student.october_fees_date
-        student_dict['november_fees_date']=student.november_fees_date
+        student_dict[12]=student.december_fees_date
+        student_dict[1]=student.january_fees_date
+        student_dict[2]=student.february_fees_date
+        student_dict[3]=student.march_fees_date
+        student_dict[4]=student.april_fees_date
+        student_dict[5]=student.may_fees_date
+        student_dict[6]=student.june_fees_date
+        student_dict[7]=student.july_fees_date
+        student_dict[8]=student.august_fees_date
+        student_dict[9]=student.september_fees_date
+        student_dict[10]=student.october_fees_date
+        student_dict[11]=student.november_fees_date
     elif standard == '11 commerce':
         student_dict[4]=student.april_fees_date
         student_dict[5]=student.may_fees_date
@@ -78,43 +78,43 @@ def get_monthly_status(student, standard):
         student_dict[14]=student.february_fees_date
 
     elif standard ==  '11 science':
-        student_dict['april_fees_date']=student.april_fees_date
-        student_dict['may_fees_date']=student.may_fees_date
-        student_dict['june_fees_date']=student.june_fees_date
-        student_dict['july_fees_date']=student.july_fees_date
-        student_dict['august_fees_date']=student.august_fees_date
-        student_dict['september_fees_date']=student.september_fees_date
-        student_dict['october_fees_date']=student.october_fees_date
-        student_dict['november_fees_date']=student.november_fees_date
-        student_dict['december_fees_date']=student.december_fees_date
-        student_dict['january_fees_date']=student.january_fees_date
-        student_dict['february_fees_date']=student.february_fees_date
+        student_dict[4]=student.april_fees_date
+        student_dict[5]=student.may_fees_date
+        student_dict[6]=student.june_fees_date
+        student_dict[7]=student.july_fees_date
+        student_dict[8]=student.august_fees_date
+        student_dict[9]=student.september_fees_date
+        student_dict[10]=student.october_fees_date
+        student_dict[11]=student.november_fees_date
+        student_dict[12]=student.december_fees_date
+        student_dict[1]=student.january_fees_date
+        student_dict[2]=student.february_fees_date
 
     elif standard ==  '12 commerce':
-        student_dict['april_fees_date']=student.april_fees_date
-        student_dict['may_fees_date']=student.may_fees_date
-        student_dict['june_fees_date']=student.june_fees_date
-        student_dict['july_fees_date']=student.july_fees_date
-        student_dict['august_fees_date']=student.august_fees_date
-        student_dict['september_fees_date']=student.september_fees_date
-        student_dict['october_fees_date']=student.october_fees_date
-        student_dict['november_fees_date']=student.november_fees_date
-        student_dict['december_fees_date']=student.december_fees_date
-        student_dict['january_fees_date']=student.january_fees_date
-        student_dict['february_fees_date']=student.february_fees_date
+        student_dict[4]=student.april_fees_date
+        student_dict[5]=student.may_fees_date
+        student_dict[6]=student.june_fees_date
+        student_dict[7]=student.july_fees_date
+        student_dict[8]=student.august_fees_date
+        student_dict[9]=student.september_fees_date
+        student_dict[10]=student.october_fees_date
+        student_dict[11]=student.november_fees_date
+        student_dict[12]=student.december_fees_date
+        student_dict[1]=student.january_fees_date
+        student_dict[2]=student.february_fees_date
 
     elif standard == '12 science':
-        student_dict['april_fees_date']=student.april_fees_date
-        student_dict['may_fees_date']=student.may_fees_date
-        student_dict['june_fees_date']=student.june_fees_date
-        student_dict['july_fees_date']=student.july_fees_date
-        student_dict['august_fees_date']=student.august_fees_date
-        student_dict['september_fees_date']=student.september_fees_date
-        student_dict['october_fees_date']=student.october_fees_date
-        student_dict['november_fees_date']=student.november_fees_date
-        student_dict['december_fees_date']=student.december_fees_date
-        student_dict['january_fees_date']=student.january_fees_date
-        student_dict['february_fees_date']=student.february_fees_date
+        student_dict[4]=student.april_fees_date
+        student_dict[5]=student.may_fees_date
+        student_dict[6]=student.june_fees_date
+        student_dict[7]=student.july_fees_date
+        student_dict[8]=student.august_fees_date
+        student_dict[9]=student.september_fees_date
+        student_dict[10]=student.october_fees_date
+        student_dict[11]=student.november_fees_date
+        student_dict[12]=student.december_fees_date
+        student_dict[1]=student.january_fees_date
+        student_dict[2]=student.february_fees_date
     return student_dict
 
 
@@ -213,3 +213,11 @@ def get_current_month_fees_objects():
         's_all_subjects': s_all_subjects,
         's_only_science_subjects': s_only_science_subjects
     }
+
+def validate_teacher(username, password):
+    try:
+        teacher = Teacher.objects.get(username=username)
+        if teacher.password != password:
+            raise Exception
+    except:
+        raise Exception
